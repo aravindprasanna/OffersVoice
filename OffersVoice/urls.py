@@ -22,5 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     re_path('get/offers/(?P<type>\w+)/(?P<card>\w+)/(?P<activity>\w+)/',views.offer_list),
-    re_path('get/offer/(?P<offer_id>\w+)/',views.offer)
+    re_path('get/offer/(?P<offer_id>\w+)/',views.offer),
+    re_path('get/offers/(?P<type>\w+)/',views.offer_by_type),
+    re_path('search/offers/(?P<search_parm>\w+)/',views.offer_search),
 ]
