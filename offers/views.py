@@ -25,4 +25,20 @@ def offer(request,offer_id):
         serializer = OffersSerializer(selected_offer)
         return JsonResponse(serializer.data,safe=False)
 
+@csrf_exempt
+def offer_by_type(request,type):
+
+    if request.method == 'GET':
+        relevant_offers = OffersMapping.objects.get(offer_type=type.lower(),offer_card="all",offer_activity="all")
+        serializer = OffersMappingSerializer(relevant_offers)
+        return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def offer_search(request,search_parm):
+
+    if request.method == 'GET':
+        relevant_offers = Offers.objects.all().filter(offer_details__icontains=search_parm)
+        serializer = OffersSerializer(relevant_offers,many=True)
+        return JsonResponse(serializer.data, safe=False)
+
 
